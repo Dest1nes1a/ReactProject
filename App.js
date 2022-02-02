@@ -9,6 +9,7 @@ import FirstPage from './pages/FirstPage';
 import SecondPage from './pages/SecondPage';
 import ThirdPage from './pages/ThirdPage';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import CustomSidebarMenu from './pages/CustomSidebarMenu';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -31,7 +32,6 @@ const NavigationDrawerStructure = (props)=>{
     </View>
   )
 }
-
 
 function FirstScreenStack({navigation}){
   return(
@@ -60,7 +60,7 @@ function SecondScreenStack({navigation}){
       screenOptions={{
         headerStyle:{backgroundColor: '#f4511e'}, 
         headerTintColor: '#FFFF', 
-        headerTitleStyle: {fontWeight: ''},
+        headerTitleStyle: {fontWeight: 'bold'},
         headerLeft: ()=> <NavigationDrawerStructure navigationProps={navigation}/>
       }}
     >
@@ -81,7 +81,13 @@ function SecondScreenStack({navigation}){
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator
+        drawerContentOptions={{
+          activeTintColor: '#e91e63',
+          ItemStyle: {marginVertical: 5}
+      }}
+        drawerContent = {(props)=> <CustomSidebarMenu{...props}/>}
+      >
         <Drawer.Screen name='FirstPage' component ={FirstScreenStack}/>
         <Drawer.Screen name='SecondPage' component ={SecondScreenStack}/>
       </Drawer.Navigator>
