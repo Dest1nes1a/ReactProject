@@ -49,7 +49,7 @@ const MenuScreen = ({navigation}) => {
           >
             <Left>
               <Button style={{backgroundColor: '#007AFF'}}>
-                <Icon active name="wifi" />
+                <Icon active name="cart" />
               </Button>
             </Left>
             <Body>

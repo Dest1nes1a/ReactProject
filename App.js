@@ -5,9 +5,11 @@ import ProductScreen from './screens/ProductScreen';
 import DetailScreen from './screens/DetailScreen';
 import MenuScreen from './screens/MenuScreen';
 import AboutScreen from './screens/AboutScreen';
+import RegisterScreen from './screens/RegisterScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -25,10 +27,15 @@ function HomeStack() {
         component={HomeScreen}
         options={{title: 'หน้าหลัก'}}
       />
-        <Stack.Screen
+      <Stack.Screen
         name="AboutScreen"
         component={AboutScreen}
         options={{title: 'เกี่ยวกับเรา'}}
+      />
+      <Stack.Screen
+        name="RegisterScreen"
+        component={RegisterScreen}
+        options={{title: 'ลงทะเบียน'}}
       />
     </Stack.Navigator>
   );
@@ -51,6 +58,11 @@ function ProductStack() {
         name="DetailScreen"
         component={DetailScreen}
         options={{title: 'DETAIL SCREEN'}}
+      />
+       <Stack.Screen
+        name="RegisterScreen"
+        component={RegisterScreen}
+        options={{title: 'ลงทะเบียน'}}
       />
     </Stack.Navigator>
   );
