@@ -59,11 +59,6 @@ function ProductStack() {
         component={DetailScreen}
         options={{title: 'DETAIL SCREEN'}}
       />
-       <Stack.Screen
-        name="RegisterScreen"
-        component={RegisterScreen}
-        options={{title: 'ลงทะเบียน'}}
-      />
     </Stack.Navigator>
   );
 };

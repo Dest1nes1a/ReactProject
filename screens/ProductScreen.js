@@ -42,7 +42,7 @@ const ProductScreen = ({navigation}) => {
           <Item
             title="register"
             iconName="person-add"
-            onPress={() => navigation.navigate("RegisterScreen")}
+            onPress={() => alert("ลงทะเบียน")}
           />
         </HeaderButtons>
       ),
