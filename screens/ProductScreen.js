@@ -7,7 +7,7 @@ const IoniconsHeaderButton = props => (
   <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
 );
 
-const HomeScreen = ({navigation}) => {
+const ProductScreen = ({navigation}) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -33,19 +33,12 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Ionicons name="home-outline" size={30} color="#f4511e" />
-      <Text>หน้าหลัก</Text>
-      <Button
-        title="Go to About"
-        onPress={() =>
-          navigation.navigate('About', {email: 'ju.siripong_st@tni.ac.th'})
-        }  
-      />
+      <Text>สินค้า</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default ProductScreen;
 
 const styles = StyleSheet.create({
   container: {

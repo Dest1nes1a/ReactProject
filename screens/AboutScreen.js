@@ -1,12 +1,12 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const AboutScreen = ({route}) => {
-    const {email} = route.params; //Navigation.params แต่มันนิยมใช้ สำหรับไปอีกหน้านึง
+const AboutScreen = () => {
+    //const {email} = route.params; //Navigation.params แต่มันนิยมใช้ สำหรับไปอีกหน้านึง
     return (
         <View style={styles.container}>
             <Text>AboutScreen</Text>
-            <Text>Email: {email}</Text>
+        {/*    <Text>Email: {email}</Text> */}
         </View>
         
     )
