@@ -10,6 +10,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import LoginScreen from './screens/LoginScreen';
+import UserStoreProvider from './context/UserContext';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -37,7 +38,7 @@ function HomeStack() {
         component={RegisterScreen}
         options={{title: 'ลงทะเบียน'}}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="LoginScreen"
         component={LoginScreen}
         options={{title: 'เข้าสู่ระบบ'}}
@@ -70,15 +71,18 @@ function ProductStack() {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        initialRouteName="HomeScreen"
-        drawerPosition="left"
-        drawerContent={props => <MenuScreen {...props} />}>
-        <Drawer.Screen name="HomeStack" component={HomeStack} />
-        <Drawer.Screen name="ProductStack" component={ProductStack} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <UserStoreProvider>
+        <NavigationContainer>
+        <Drawer.Navigator
+          initialRouteName="HomeScreen"
+          drawerPosition="left"
+          drawerContent={props => <MenuScreen {...props} />}>
+          <Drawer.Screen name="HomeStack" component={HomeStack} />
+          <Drawer.Screen name="ProductStack" component={ProductStack} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </UserStoreProvider>
+
   );
 };
 
