@@ -28,7 +28,10 @@ const LoginScreen = ({navigation}) => {
         onSubmit={async (values, {setSubmitting}) => {
           try {
             const url = 'https://api.codingthailand.com/api/login'
-            
+            const res = await axios.post(url,{
+                email : values.email, 
+                password : values.password
+              })
           } catch (error) { 
             
           } finally{
@@ -38,7 +41,7 @@ const LoginScreen = ({navigation}) => {
         }}>
         {({errors, touched, values, handleBlur, handleChange, handleSubmit, isSubmitting}) => ( 
           <Form>
-            <Item fixedLabel error={errors.email && touched.email?true:false} >
+            <Item fixedLabel>
               <Label>Email</Label>
               <Input 
                 value={values.email}
@@ -46,14 +49,9 @@ const LoginScreen = ({navigation}) => {
                 onBlur={handleBlur('email')}
                 keyboardType='email-address'
               />
-              {errors.email && touched.email && <Icon name='close-circle'/>}
             </Item>
-            {errors.email && touched.email && (
-                <Item>
-                  <Label style={{color:'red'}}>{errors.email}</Label>
-                </Item>
-              )}
-            <Item fixedLabel error={errors.password && touched.password?true:false}>
+
+            <Item fixedLabel>
               <Label>Password</Label>
               <Input 
                 value={values.password}
@@ -62,14 +60,8 @@ const LoginScreen = ({navigation}) => {
                 keyboardType='number-pad'
                 secureTextEntry={true}
               />
-              {errors.password && touched.password && <Icon name='close-circle'/>}
             </Item>
-            {errors.password && touched.password && (
-                <Item>
-                  <Label style={{color:'red'}}>{errors.password}</Label>
-                </Item>
-              )}
-            
+
             <Button
               onPress={handleSubmit}
               disabled = {isSubmitting}
