@@ -6,10 +6,10 @@ import DetailScreen from './screens/DetailScreen';
 import MenuScreen from './screens/MenuScreen';
 import AboutScreen from './screens/AboutScreen';
 import RegisterScreen from './screens/RegisterScreen';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+import LoginScreen from './screens/LoginScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -37,9 +37,14 @@ function HomeStack() {
         component={RegisterScreen}
         options={{title: 'ลงทะเบียน'}}
       />
+       <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{title: 'เข้าสู่ระบบ'}}
+      />
     </Stack.Navigator>
   );
-};
+}
 
 function ProductStack() {
   return (
@@ -54,14 +59,14 @@ function ProductStack() {
         component={ProductScreen}
         options={{title: 'สินค้า'}}
       />
-        <Stack.Screen
+      <Stack.Screen
         name="DetailScreen"
         component={DetailScreen}
         options={{title: 'DETAIL SCREEN'}}
       />
     </Stack.Navigator>
   );
-};
+}
 
 const App = () => {
   return (
@@ -69,10 +74,9 @@ const App = () => {
       <Drawer.Navigator
         initialRouteName="HomeScreen"
         drawerPosition="left"
-        drawerContent = {(props)=> <MenuScreen{...props}/>}
-      >
-        <Drawer.Screen name='HomeStack' component ={HomeStack}/>
-        <Drawer.Screen name='ProductStack' component ={ProductStack}/>
+        drawerContent={props => <MenuScreen {...props} />}>
+        <Drawer.Screen name="HomeStack" component={HomeStack} />
+        <Drawer.Screen name="ProductStack" component={ProductStack} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

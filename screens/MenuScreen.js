@@ -59,6 +59,21 @@ const MenuScreen = ({navigation}) => {
               <Icon active name="arrow-forward" />
             </Right>
           </ListItem>
+          <ListItem icon
+             onPress={()=> navigation.navigate('LoginScreen')}
+          >
+            <Left>
+              <Button style={{backgroundColor: '#007AFF'}}>
+                <Icon active name="log-in" />
+              </Button>
+            </Left>
+            <Body>
+              <Text>เข้าสู่ระบบ</Text>
+            </Body>
+            <Right>
+              <Icon active name="arrow-forward" />
+            </Right>
+          </ListItem>
         </Content>
       </View>
     </ScrollView>

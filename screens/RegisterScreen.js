@@ -34,13 +34,29 @@ const RegisterScreen = ({navigation}) => {
           }}
           validationSchema={validateSchema}
           //เมื่อคลิกที่ปุ่ม Register ให้ทำงานส่วนนี้
-          onSubmit={(values) => {
+          onSubmit={async (values, {setSubmitting}) => {
             // same shape as initial values
-            console.log(values);
+            //alert(JSON.stringify(values))
+            try {
+              const url = 'https://api.codingthailand.com/api/register'
+              const res = await axios.post(url,{
+                name : values.name, 
+                email : values.email, 
+                password : values.password
+              })
+              alert(res.data.message)
+              //กลับไปหน้า HOME
+              navigation.navigate('HomeScreen');
+            } catch (error) { //ถ้าไม่สามารถบันทึกข้อมูลลง server ได้
+              alert(error.response.data.errors.email[0])
+            } finally{// ทำให้ปุ่มสามารถกดได้อีก
+              setSubmitting = false
+            }
+
           }}>
             {/* errors ใช้สำหรับการตรวจสอบ error ที่เกิดขึ้น/state of error เป็นอะไร */}
             {/* touched เมื่อผู้ใช้ไปกดที่ Name และเลื่อนเมาส์ออกไปด้านนอกช่อง Input โดยไม่กรอกข้อมูล */}
-          {({errors, touched, values, handleBlur, handleChange}) => ( 
+          {({errors, touched, values, handleBlur, handleChange, handleSubmit, isSubmitting}) => (  //handleSubmit click button แล้วทำงานอะไร | isSubmitting ถ้ากำลัง submit อยู่จะไม่ให้ปุ่ม submit ทำงานให้เสร็จก่อน แล้ว button จะขึ้นมาให้กดใหม่
             <Form>
               {/* กำหนดให้มีเส้นสีแดงถ้าผู้ใช้ไม่กรอกข้อมูลในช่อง Input */}
               <Item fixedLabel error={errors.name && touched.name?true:false}>
@@ -63,6 +79,7 @@ const RegisterScreen = ({navigation}) => {
                   value={values.email}
                   onChangeText={handleChange('email')}
                   onBlur={handleBlur('email')}
+                  keyboardType='email-address'
                 />
                 {errors.email && touched.email && <Icon name='close-circle'/>}
               </Item>
@@ -77,6 +94,8 @@ const RegisterScreen = ({navigation}) => {
                   value={values.password}
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
+                  keyboardType='number-pad'
+                  secureTextEntry={true}
                 />
                 {errors.password && touched.password && <Icon name='close-circle'/>}
               </Item>
@@ -85,7 +104,11 @@ const RegisterScreen = ({navigation}) => {
                     <Label style={{color:'red'}}>{errors.password}</Label>
                   </Item>
                 )}
+              
               <Button
+                onPress={handleSubmit}
+                //เอาไว้สำหรับ เปิด/ปิดปุ่มการทำงาน
+                disabled = {isSubmitting}
                 block
                 large
                 style={{marginTop: 30, backgroundColor: '#f4511e'}}
